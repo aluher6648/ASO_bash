@@ -1,8 +1,21 @@
-#!/bin/bash
+if [[ $# -ne 1 ]]; then
+    echo "Uso: $0 [nombre_de_usuario]"
+    exit 1
+fi
 
-if [[ $# -eq 1 ]]; then
-    
+usuario=$1
+
+# Verificar si el usuario está dado de alta en el sistema
+if getent passwd "$usuario" > /dev/null; then
+    echo "Usuario $usuario registrado."
 else
-    echo "introduce un sólo parámetro"
-    echo " se lanza asi  ./ejercicio18.sh [usuario]"
+    echo "Usuario $usuario no registrado."
+    exit
+fi
+
+# Verificar si el usuario ha iniciado sesión
+if who | grep -q "^$usuario "; then
+    echo "Usuario $usuario ha iniciado sesión."
+else
+    echo "Usuario $usuario no ha iniciado sesión."
 fi
