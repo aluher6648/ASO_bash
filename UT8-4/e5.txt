@@ -1,0 +1,2 @@
+Añadir la linea a crontab
+*/5 * * * * echo "$(date)" >> /ruta/fechas.txt
